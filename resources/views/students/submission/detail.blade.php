@@ -10,8 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-								<a href="{{ url("/submission") }}" class="btn btn-sm btn-dark mb-3">< Kembali</a>
-
 								<ul class="list-group">
 									<li class="list-group-item">
 										<div class="row">
@@ -63,10 +61,21 @@
 											<div class="col"> <p>{{ $submission->pesan_khusus }}</p> </div>
 										</div>
 									</li>
+
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-3">File Karya</div>
+											<div class="col">
+												 <p>{{ $submission->karya }}</p>
+												 <a target="_blank" href="{{url('/files/'.$submission->karya)}}" class="btn btn-sm btn-outline-dark">Download</a> 
+											</div>
+										</div>
+									</li>
 									
-									<h3 class="mt-3"><b>Link File Karya:</b></h3>
-									<a target="_blank" href="{{ $submission->karya }}">{{ $submission->karya }}</a>
 								</ul>
+
+								<a href="{{ url("/submission") }}" class="btn btn-sm btn-dark mt-3 mb-3">< Kembali</a>
+
                 </div>
             </div>
         </div>

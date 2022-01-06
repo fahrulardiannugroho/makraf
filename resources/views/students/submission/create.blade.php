@@ -45,9 +45,9 @@
 										</div>
 
 										<div class="form-group row mb-3">
-											<label for="karya" class="col-sm-2 col-form-label">Tautan Karya</label>
+											<label for="karya" class="col-sm-2 col-form-label">Upload Karya <sup>(pdf)</sup></label>
 											<div class="col-sm-10">
-												<input name="karya" type="text" class="form-control" id="penulis" placeholder="Ex: http://drive.google.com/..."  required>
+												<input name="karya" id="karya" class="form-control" type="file" required>
 											</div>
 										</div>
 

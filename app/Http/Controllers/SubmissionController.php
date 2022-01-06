@@ -23,6 +23,7 @@ class SubmissionController extends Controller
 									->join('skema_pkm', 'submission.skema_pkm', '=', 'skema_pkm.id')
 									->join('status_submission', 'submission.status_review', '=', 'status_submission.id')
 									->join('list_pembimbing', 'submission.dosen_pembimbing', '=', 'list_pembimbing.id')
+									->where('submission.user_id', '=', auth()->user()->email)
 									->select('submission.*', 'skema_pkm.skema', 'status_submission.status', 'list_pembimbing.nama_dosen')
 									->get();
 
@@ -55,18 +56,29 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-			
-
 			$submission = new Submission();
+
+			$request->validate([
+				'karya' => 'mimes:pdf|max:10240',
+			]);
+			
+			$file = $request->file('karya');
+			$nama_file = time()."_".$file->getClientOriginalName();	
+
+			// folder tempat  file diupload
+			$tujuan_upload = 'files';
+			$file->move($tujuan_upload,$nama_file);
+
+			$submission->user_id = auth()->user()->email;
 			$submission->skema_pkm = $request->skema_pkm;
 			$submission->dosen_pembimbing = $request->list_pembimbing;
 			$submission->jenis_karya = $request->jenis_karya;
-			$submission->karya = $request->karya;
+			$submission->karya = $nama_file;
 			$submission->pesan_khusus = $request->pesan_khusus;
 			$submission->status_review = 1;
 			$submission->save();
 		
-			return redirect('/submission')->with('success', 'data berhasil disimpan');
+			return redirect('/submission')->with('success', 'Data berhasil terkirim untuk direview');
     }
 
     /**

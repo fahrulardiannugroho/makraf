@@ -1,4 +1,11 @@
 <x-app-layout>
+
+		@if ($message = Session::get('success'))
+		<div class="alert alert-primary" role="alert">
+			{{ $message }}
+		</div>
+		@endif
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Submission') }}
