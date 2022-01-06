@@ -77,7 +77,7 @@
                 </div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('dosen')">
+                    <x-nav-link :href="route('dosen')" :active="request()->routeIs('dosen')">
                         {{ __('Dosen') }}
                     </x-nav-link>
                 </div>
@@ -118,7 +118,15 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- Authentication -->
+												<x-dropdown-link :href="route('profile-setting')">
+														{{ __('Profil Saya') }}
+												</x-dropdown-link>
+
+												<x-dropdown-link :href="route('account-setting')">
+														{{ __('Pengaturan Akun') }}
+												</x-dropdown-link>
+
+												<!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -128,6 +136,8 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+
+
                     </x-slot>
                 </x-dropdown>
             </div>

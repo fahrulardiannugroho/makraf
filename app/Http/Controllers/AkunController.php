@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KawanMahasiswa;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
-class KawanMahasiwaController extends Controller
+class AkunController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,7 @@ class KawanMahasiwaController extends Controller
      */
     public function index()
     {
-			$kawanMahasiswa = DB::table('kawan_mahasiswa')->get();
-
-			return view('students.kawan-mahasiswa.index', [
-				'kawanMahasiswa' => $kawanMahasiswa
-			]);
+			return view('akun.index');
     }
 
     /**
@@ -39,10 +34,9 @@ class KawanMahasiwaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-		public function store(Request $request)
+    public function store(Request $request)
     {
-			
+        //
     }
 
     /**
@@ -51,15 +45,9 @@ class KawanMahasiwaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($username)
+    public function show($id)
     {
-			$kawanMahasiswa = DB::table('kawan_mahasiswa')
-				->where('kawan_mahasiswa.username', '=', $username)
-				->get()->first();
-
-			return view("students.kawan-mahasiswa.detail", [
-				"kawanMahasiswa" => $kawanMahasiswa
-			]);
+        //
     }
 
     /**
@@ -80,9 +68,23 @@ class KawanMahasiwaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+					'current_password' => ['required'],
+					'password' => ['required', 'min:8', 'confirmed'],
+					'password_confirmation' => ['required']
+				]);
+
+				if (Hash::check($request->current_password, auth()->user()->password)) {
+					auth()->user()->update(['password' => Hash::make($request->password)]);
+
+					return back()->with('success', "Pasword kamu berhasil diupdate");
+				}
+
+				throw ValidationException::withMessages([
+					'current_password' => "Your current password does not match with our record",
+				]);
     }
 
     /**

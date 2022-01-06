@@ -14,34 +14,28 @@
 									Hubungi dosen melalui email jika ingin meminta bantuan menjadi dosen pembimbing
 								</div>
 
-								<a href="{{ url("/list-pembimbing") }}" class="btn btn-sm btn-dark mb-3">< Kembali</a>
+								<div class="row">
+										<div class="col">
 
-								<ul class="list-group">
-									<li class="list-group-item">
-										<div class="row">
-											<div class="col-3">Nama Lengkap</div>
-											<div class="col"> <b>{{ $listPembimbing->nama_dosen }}</b> </div>
 										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="row">
-											<div class="col-3">Departemen</div>
-											<div class="col"> <b>{{ $listPembimbing->departemen }}</b> </div>
+
+										<div class="col-12 col-md-9">
+												<h2 class="font-semibold text-xl"> {{ $listPembimbing->nama_dosen }} </h2>
+												<p>{{ $listPembimbing->departemen }}</p>
+												<p>{{ $listPembimbing->email }}</p>
+												
+												<h2 class="font-semibold text-xl mt-5">Mata Kuliah Diampu</h2>
+												<p>{{ $listPembimbing->daftar_matkul_diajar }}</p>
+
+												<h2 class="font-semibold text-xl mt-5">Rekam Jejak Bimbingan</h2>
+												@if ($listPembimbing->rekam_jejak_bimbingan == null)
+												<p>-</p>
+												@else
+												<p>{{ $listPembimbing->rekam_jejak_bimbingan }}</p>
+												@endif
+
+												<a href="{{ url("/list-pembimbing") }}" class="btn btn-sm btn-dark mt-5 mb-3">< Kembali</a>
 										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="row">
-											<div class="col-3">Mata Kuliah Diampu</div>
-											<div class="col"> <b>{{ $listPembimbing->daftar_matkul_diajar }}</b> </div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="row">
-											<div class="col-3">Email</div>
-											<div class="col"> <b>{{ $listPembimbing->email }}</b> </div>
-										</div>
-									</li>
-								</ul>
                 </div>
             </div>
         </div>

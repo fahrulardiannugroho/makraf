@@ -10,11 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-										<a href="{{ url("/submission/create") }}" class="btn btn-sm btn-dark mb-5"><i class="bi bi-plus"></i> Buat Submission</a>
+										<a href="{{ url("/submission/create") }}" class="btn btn-sm btn-dark mb-3"><i class="bi bi-plus"></i> Buat Submission</a>
 
-                    <h3>Riwayat Submission</h3>
-
-										<table class="table table-striped">
+										<table class="table table-borderless table-striped">
 												<thead>
 														<th>#</th>
 														<th>Skema PKM</th>

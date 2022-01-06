@@ -25,6 +25,11 @@ Route::get('/login', function () {
 //auth route for both 
 Route::group(['middleware' => ['auth']], function() { 
 	Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+	Route::get('/user/profile-setting', 'App\Http\Controllers\ProfileController@index')->name('profile-setting');
+	Route::post('/user/profile-setting', 'App\Http\Controllers\ProfileController@store')->name('store-profile');
+	Route::put('/user/profile-setting/{username}', 'App\Http\Controllers\ProfileController@update')->name('update-profile');
+	Route::get('/user/account-setting', 'App\Http\Controllers\AkunController@index')->name('account-setting');
+	Route::put('/user/account-setting', 'App\Http\Controllers\AkunController@update')->name('account-update');
 });
 
 // for student
@@ -33,7 +38,7 @@ Route::group(['middleware' => ['auth', 'role:student']], function() {
 	Route::get('/lowongan-tim/create', 'App\Http\Controllers\LowonganTimController@create')->name('buat-lowongan-tim');
 
 	Route::get('/kawan-mahasiswa', 'App\Http\Controllers\KawanMahasiwaController@index')->name('kawan-mahasiswa');
-	Route::get('/kawan-mahasiswa/detail/{id}', 'App\Http\Controllers\KawanMahasiwaController@show')->name('show-kawan-mahasiswa');
+	Route::get('/kawan-mahasiswa/detail/{username}', 'App\Http\Controllers\KawanMahasiwaController@show')->name('show-kawan-mahasiswa');
 
 	Route::get('/list-pembimbing', 'App\Http\Controllers\ListPembimbingController@index')->name('list-pembimbing');
 	Route::get('/list-pembimbing/detail/{id}', 'App\Http\Controllers\ListPembimbingController@show')->name('show-list-pembimbing');
