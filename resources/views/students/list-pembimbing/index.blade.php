@@ -19,7 +19,7 @@
 									<tbody>
 									@foreach($listPembimbing as $index => $lp)
 											<tr>
-												<td>[Foto]</td>
+												<td> <img src="{{url('/images/avatar.jpg')}}" width="50" alt="Image"/> </td>
 												<td> {{ $lp->nama_dosen }} </td>
 												<td> {{ $lp->departemen }} </td>
 												<td>

@@ -1,8 +1,10 @@
 <x-app-layout>
 
+		@if (!(Auth::user()->name == $lowonganTim->username))
 		<div class="alert alert-primary" role="alert">
 			Hubungi melalui email jika berminat bergabung dalam tim
 		</div>	
+		@endif
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

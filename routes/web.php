@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
 
 	Route::get('/berita', 'App\Http\Controllers\BeritaController@index')->name('berita');
 	
-	Route::get('/arsip-pkp', 'App\Http\Controllers\ArsipPkmController@index')->name('arsip_pkm');
+	Route::get('/arsip-pkm', 'App\Http\Controllers\ArsipPkmController@index')->name('arsip_pkm');
 	
 	Route::get('/arsip-pimnas', 'App\Http\Controllers\ArsipPimnasController@index')->name('arsip_pimnas');
 });

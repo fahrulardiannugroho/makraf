@@ -19,23 +19,62 @@
                 </div>
 
 								@if (Auth::user()->hasRole('student'))
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('lowongan-tim')" :active="request()->routeIs('lowongan-tim')">
-                        {{ __('Lowongan Tim') }}
-                    </x-nav-link>
-                </div>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kawan-mahasiswa')" :active="request()->routeIs('kawan-mahasiswa')">
-                        {{ __('Kawan Mahasiswa') }}
-                    </x-nav-link>
-                </div>
+								<div class="hidden sm:flex sm:items-center sm:ml-6">
+										<x-dropdown align="right" width="48">
+												<x-slot name="trigger">
+														<button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+																<div> Bentuk TIM </div>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('list-pembimbing')" :active="request()->routeIs('list-pembimbing')">
-                        {{ __('List Pembimbing') }}
-                    </x-nav-link>
-                </div>
+																<div class="ml-1">
+																		<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+																				<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+																		</svg>
+																</div>
+														</button>
+												</x-slot>
+
+												<x-slot name="content">
+														<x-dropdown-link :href="route('lowongan-tim')" :active="request()->routeIs('lowongan-tim')">
+																{{ __('Lowongan Tim') }}
+														</x-dropdown-link>
+
+														<x-dropdown-link :href="route('kawan-mahasiswa')" :active="request()->routeIs('kawan-mahasiswa')">
+																{{ __('Kawan Mahasiswa') }}
+														</x-dropdown-link>
+
+														<x-dropdown-link :href="route('list-pembimbing')" :active="request()->routeIs('list-pembimbing')">
+																{{ __('List Pembimbing') }}
+														</x-dropdown-link>
+												</x-slot>
+										</x-dropdown>
+								</div>
+
+								<div class="hidden sm:flex sm:items-center sm:ml-6">
+										<x-dropdown align="right" width="48">
+												<x-slot name="trigger">
+														<button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+																<div> Referensi & Contoh Luaran </div>
+
+																<div class="ml-1">
+																		<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+																				<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+																		</svg>
+																</div>
+														</button>
+												</x-slot>
+
+												<x-slot name="content">
+														<x-dropdown-link :href="route('lowongan-tim')" :active="request()->routeIs('lowongan-tim')">
+																{{ __('Arsip PKM') }}
+														</x-dropdown-link>
+
+														<x-dropdown-link :href="route('kawan-mahasiswa')" :active="request()->routeIs('kawan-mahasiswa')">
+																{{ __('Arsip PIMNAS') }}
+														</x-dropdown-link>
+												</x-slot>
+										</x-dropdown>
+								</div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('submission')" :active="request()->routeIs('submission')">
@@ -53,35 +92,61 @@
                 @endif
 
 								@if (Auth::user()->hasRole('admin'))
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('kegiatan')">
-                        {{ __('Kegiatan') }}
-                    </x-nav-link>
-                </div>
+								<div class="hidden sm:flex sm:items-center sm:ml-6">
+										<x-dropdown align="right" width="48">
+												<x-slot name="trigger">
+														<button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+																<div> Postingan Publik </div>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('pengumuman')" :active="request()->routeIs('pengumuman')">
-                        {{ __('Pengumuman') }}
-                    </x-nav-link>
-                </div>
+																<div class="ml-1">
+																		<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+																				<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+																		</svg>
+																</div>
+														</button>
+												</x-slot>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('berita')" :active="request()->routeIs('berita')">
-                        {{ __('Berita') }}
-                    </x-nav-link>
-                </div>
+												<x-slot name="content">
+														<x-dropdown-link :href="route('kegiatan')" :active="request()->routeIs('kegiatan')">
+																{{ __('Kegiatan') }}
+														</x-dropdown-link>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('arsip_pkm')" :active="request()->routeIs('arsip-pkm')">
-                        {{ __('Arsip PKM') }}
-                    </x-nav-link>
-                </div>
+														<x-dropdown-link :href="route('pengumuman')" :active="request()->routeIs('pengumuman')">
+																{{ __('Pengumuman') }}
+														</x-dropdown-link>
 
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('arsip_pimnas')" :active="request()->routeIs('arsip-pimnas')">
-                        {{ __('Arsip PIMNAS') }}
-                    </x-nav-link>
-                </div>
+														<x-dropdown-link :href="route('berita')" :active="request()->routeIs('berita')">
+																{{ __('Berita') }}
+														</x-dropdown-link>
+												</x-slot>
+										</x-dropdown>
+								</div>
+
+								<div class="hidden sm:flex sm:items-center sm:ml-6">
+										<x-dropdown align="right" width="48">
+												<x-slot name="trigger">
+														<button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+																<div> Arsip PKM dan PIMNAS </div>
+
+																<div class="ml-1">
+																		<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+																				<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+																		</svg>
+																</div>
+														</button>
+												</x-slot>
+
+												<x-slot name="content">
+														<x-dropdown-link :href="route('arsip_pkm')" :active="request()->routeIs('arsip-pkm')">
+																{{ __('Arsip PKM') }}
+														</x-dropdown-link>
+
+														<x-dropdown-link :href="route('arsip_pimnas')" :active="request()->routeIs('arsip-pimnas')">
+																{{ __('Arsip PIMNAS') }}
+														</x-dropdown-link>
+												</x-slot>
+										</x-dropdown>
+								</div>
                 @endif
             </div>
 

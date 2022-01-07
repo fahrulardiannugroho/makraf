@@ -40,11 +40,11 @@
 																		{{ $sb->status }}
 																	</span>
 																@elseif($sb->status_review == 2)
-																	<span class="badge bg-success">
+																	<span class="badge bg-warning">
 																		{{ $sb->status }}
 																	</span>
 																@else 
-																	<span class="badge bg-warning">
+																	<span class="badge bg-success">
 																		{{ $sb->status }}
 																	</span>
 																@endif
