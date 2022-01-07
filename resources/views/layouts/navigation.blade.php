@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        <!-- <x-application-logo class="block h-10 w-auto fill-current text-gray-600" /> -->
+												<img src="{{url('/images/makraf_logo.png')}}" width="100" alt="Image"/>
                     </a>
                 </div>
 
@@ -45,14 +46,8 @@
 
 								@if (Auth::user()->hasRole('reviewer'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('karya')" :active="request()->routeIs('dashboard.postcreate')">
-                        {{ __('Karya Mahasiswa') }}
-                    </x-nav-link>
-                </div>
-
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('karya')" :active="request()->routeIs('dashboard.postcreate')">
-                        {{ __('Profile saya') }}
+                    <x-nav-link :href="route('submission-mahasiswa')" :active="request()->routeIs('submission-mahasiswa')">
+                        {{ __('Submission Mahasiswa') }}
                     </x-nav-link>
                 </div>
                 @endif
@@ -65,37 +60,25 @@
                 </div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('pengumuman')">
+                    <x-nav-link :href="route('pengumuman')" :active="request()->routeIs('pengumuman')">
                         {{ __('Pengumuman') }}
                     </x-nav-link>
                 </div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('berita')">
+                    <x-nav-link :href="route('berita')" :active="request()->routeIs('berita')">
                         {{ __('Berita') }}
                     </x-nav-link>
                 </div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dosen')" :active="request()->routeIs('dosen')">
-                        {{ __('Dosen') }}
-                    </x-nav-link>
-                </div>
-
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('mahasiswa')">
-                        {{ __('Mahasiswa') }}
-                    </x-nav-link>
-                </div>
-
-								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('arsip-pkm')">
+                    <x-nav-link :href="route('arsip_pkm')" :active="request()->routeIs('arsip-pkm')">
                         {{ __('Arsip PKM') }}
                     </x-nav-link>
                 </div>
 
 								<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('arsip-pimnas')">
+                    <x-nav-link :href="route('arsip_pimnas')" :active="request()->routeIs('arsip-pimnas')">
                         {{ __('Arsip PIMNAS') }}
                     </x-nav-link>
                 </div>
@@ -118,9 +101,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+												@if (Auth::user()->hasRole('student'))
 												<x-dropdown-link :href="route('profile-setting')">
 														{{ __('Profil Saya') }}
 												</x-dropdown-link>
+												@endif
 
 												<x-dropdown-link :href="route('account-setting')">
 														{{ __('Pengaturan Akun') }}

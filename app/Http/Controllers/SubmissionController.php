@@ -23,12 +23,20 @@ class SubmissionController extends Controller
 									->join('skema_pkm', 'submission.skema_pkm', '=', 'skema_pkm.id')
 									->join('status_submission', 'submission.status_review', '=', 'status_submission.id')
 									->join('list_pembimbing', 'submission.dosen_pembimbing', '=', 'list_pembimbing.id')
-									->where('submission.user_id', '=', auth()->user()->email)
+									->where('submission.user_id', '=', auth()->user()->name)
+									->select('submission.*', 'skema_pkm.skema', 'status_submission.status', 'list_pembimbing.nama_dosen')
+									->get();
+
+			$allSubmission = DB::table('submission')
+									->join('skema_pkm', 'submission.skema_pkm', '=', 'skema_pkm.id')
+									->join('status_submission', 'submission.status_review', '=', 'status_submission.id')
+									->join('list_pembimbing', 'submission.dosen_pembimbing', '=', 'list_pembimbing.id')
 									->select('submission.*', 'skema_pkm.skema', 'status_submission.status', 'list_pembimbing.nama_dosen')
 									->get();
 
 			return view('students.submission.index', [
-				'submission' => $submission
+				'submission' => $submission,
+				'allSubmission' => $allSubmission,
 			]);
     }
 
@@ -69,7 +77,7 @@ class SubmissionController extends Controller
 			$tujuan_upload = 'files';
 			$file->move($tujuan_upload,$nama_file);
 
-			$submission->user_id = auth()->user()->email;
+			$submission->user_id = auth()->user()->name;
 			$submission->skema_pkm = $request->skema_pkm;
 			$submission->dosen_pembimbing = $request->list_pembimbing;
 			$submission->jenis_karya = $request->jenis_karya;
@@ -92,10 +100,11 @@ class SubmissionController extends Controller
 
 			$submission = DB::table('submission')
 									->where('submission.id', '=', $id)
+									->join('kawan_mahasiswa', 'submission.user_id', '=', 'kawan_mahasiswa.username')
 									->join('skema_pkm', 'submission.skema_pkm', '=', 'skema_pkm.id')
 									->join('status_submission', 'submission.status_review', '=', 'status_submission.id')
 									->join('list_pembimbing', 'submission.dosen_pembimbing', '=', 'list_pembimbing.id')
-									->select('submission.*', 'skema_pkm.skema', 'status_submission.status', 'list_pembimbing.nama_dosen')
+									->select('submission.*', 'kawan_mahasiswa.*', 'skema_pkm.skema', 'status_submission.status', 'list_pembimbing.nama_dosen')
 									->get()->first();
 
 			return view('students.submission.detail', [
@@ -114,6 +123,13 @@ class SubmissionController extends Controller
         //
     }
 
+		public function createSaran($id)
+    {
+			return view('students.submission.hasil-review', [
+				'id' => $id,
+			]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -121,9 +137,31 @@ class SubmissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateSedangDireview(Request $request, $id)
     {
-        //
+			$submission = Submission::find($id);
+			$submission -> status_review = 2;
+  		$submission->update();
+
+      return back()->with('success', 'Status berhasil diupdate');
+    }
+
+		public function updateTelahDireview(Request $request, $id)
+    {
+			$submission = Submission::find($id);
+			$submission -> status_review = 3;
+  		$submission->update();
+
+      return back()->with('success', 'Status berhasil diupdate');
+    }
+
+		public function updateHasilReview(Request $request, $id)
+    {
+			$submission = Submission::find($id);
+			$submission -> saran_reviewer = $request->saran_reviewer;
+  		$submission->update();
+
+			return redirect('/submission-mahasiswa/detail/'.$id)->with('success', 'Data berhasil terkirim untuk direview');
     }
 
     /**

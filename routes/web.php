@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth']], function() {
 Route::group(['middleware' => ['auth', 'role:student']], function() { 
 	Route::get('/lowongan-tim', 'App\Http\Controllers\LowonganTimController@index')->name('lowongan-tim');
 	Route::get('/lowongan-tim/create', 'App\Http\Controllers\LowonganTimController@create')->name('buat-lowongan-tim');
+	Route::post('/lowongan-tim', 'App\Http\Controllers\LowonganTimController@store')->name('store-lowongan');
+	Route::get('/lowongan-tim/detail/{id}', 'App\Http\Controllers\LowonganTimController@show')->name('show-lowongan');
 
 	Route::get('/kawan-mahasiswa', 'App\Http\Controllers\KawanMahasiwaController@index')->name('kawan-mahasiswa');
 	Route::get('/kawan-mahasiswa/detail/{username}', 'App\Http\Controllers\KawanMahasiwaController@show')->name('show-kawan-mahasiswa');
@@ -51,17 +53,31 @@ Route::group(['middleware' => ['auth', 'role:student']], function() {
 
 // for reviewer
 Route::group(['middleware' => ['auth', 'role:reviewer']], function() { 
-	Route::get('/karya', 'App\Http\Controllers\DashboardController@postcreate')->name('karya');
+	Route::get('/submission-mahasiswa', 'App\Http\Controllers\SubmissionController@index')->name('submission-mahasiswa');
+	Route::get('/submission-mahasiswa/detail/{id}', 'App\Http\Controllers\SubmissionController@show')->name('show-submission-mahasiswa');
+	Route::post('/submission-mahasiswa/detail/sedang-direview/{id}', 'App\Http\Controllers\SubmissionController@updateSedangDireview')->name('edit-sedang-direview-submission-mahasiswa');
+	Route::post('/submission-mahasiswa/detail/telah-direview/{id}', 'App\Http\Controllers\SubmissionController@updateTelahDireview')->name('edit-telah-direview-submission-mahasiswa');
+	Route::get('/submission-mahasiswa/detail/tambah-saran/{id}', 'App\Http\Controllers\SubmissionController@createSaran')->name('show-submission-mahasiswa');
+	Route::put('/submission-mahasiswa/detail/tambah-saran/{id}', 'App\Http\Controllers\SubmissionController@updateHasilReview')->name('edit-hasil-review-submission-mahasiswa');
 });
 
 // for admin
 Route::group(['middleware' => ['auth', 'role:admin']], function() { 
-	Route::get('/kegiatan', 'App\Http\Controllers\DashboardController@postcreate')->name('kegiatan');
-	Route::get('/pengumuman', 'App\Http\Controllers\DashboardController@postcreate')->name('pengumuman');
-	Route::get('/berita', 'App\Http\Controllers\DashboardController@postcreate')->name('berita');
-	Route::get('/dosen', 'App\Http\Controllers\DashboardController@postcreate')->name('dosen');
-	Route::get('/mahasiswa', 'App\Http\Controllers\DashboardController@postcreate')->name('mahasiswa');
-	Route::get('/arsip-pkp', 'App\Http\Controllers\DashboardController@postcreate')->name('arsip-pkm');
-	Route::get('/arsip-poster-pimnas', 'App\Http\Controllers\DashboardController@postcreate')->name('arsip-pimnas');
+	Route::get('/kegiatan', 'App\Http\Controllers\KegiatanController@index')->name('kegiatan');
+	Route::get('/kegiatan/create', 'App\Http\Controllers\KegiatanController@create')->name('kegiatan.create');
+	Route::post('/kegiatan/create', 'App\Http\Controllers\KegiatanController@store')->name('kegiatan.store');
+	Route::get('/kegiatan/detail/{id}', 'App\Http\Controllers\KegiatanController@show')->name('kegiatan.show');
+	Route::get('/kegiatan/edit/{id}', 'App\Http\Controllers\KegiatanController@edit')->name('kegiatan.edit');
+	Route::put('/kegiatan/edit/{id}', 'App\Http\Controllers\KegiatanController@update')->name('kegiatan.update');
+	Route::delete('/kegiatan/delete/{id}', 'App\Http\Controllers\KegiatanController@destroy')->name('kegiatan.destroy');
+
+	Route::get('/pengumuman', 'App\Http\Controllers\PengumumanController@index')->name('pengumuman');
+
+
+	Route::get('/berita', 'App\Http\Controllers\BeritaController@index')->name('berita');
+	
+	Route::get('/arsip-pkp', 'App\Http\Controllers\ArsipPkmController@index')->name('arsip_pkm');
+	
+	Route::get('/arsip-pimnas', 'App\Http\Controllers\ArsipPimnasController@index')->name('arsip_pimnas');
 });
 require __DIR__.'/auth.php';

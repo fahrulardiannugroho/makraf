@@ -1,4 +1,11 @@
 <x-app-layout>
+
+		@if ($message = Session::get('success'))
+		<div class="alert alert-primary" role="alert">
+			{{ $message }}
+		</div>
+		@endif
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Submission') }}
@@ -14,7 +21,7 @@
 									<li class="list-group-item">
 										<div class="row">
 											<div class="col-3">Nama Mahasiswa</div>
-											<div class="col"> <b>{{ Auth::user()->name }}</b> </div>
+											<div class="col"> <b>{{ $submission->nama_mahasiswa }}</b> </div>
 										</div>
 									</li>
 									<li class="list-group-item">
@@ -40,15 +47,15 @@
 											<div class="col-3">Status Submission</div>
 											<div class="col"> 
 													@if ($submission->status_review == 1)
-														<span class="badge bg-dark">
+														<span class="badge bg-primary">
 															{{ $submission->status }}
 														</span>
 													@elseif($submission->status_review == 2)
-														<span class="badge bg-success">
+														<span class="badge bg-warning">
 															{{ $submission->status }}
 														</span>
 													@else 
-														<span class="badge bg-warning">
+														<span class="badge bg-success">
 															{{ $submission->status }}
 														</span>
 																@endif
@@ -71,10 +78,50 @@
 											</div>
 										</div>
 									</li>
+
+									@if (Auth::user()->hasRole('reviewer'))
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-3">Ubah Status</div>
+											<div class="col"> 
+												<div class="row">
+													<div class="col-3">
+															<form method="POST" action="/submission-mahasiswa/detail/sedang-direview/{{$submission->id}}">
+																	{{ method_field('POST') }}
+																	{{ csrf_field() }}
+
+																	<button onclick="return confirm('Ubah menjadi sedang direview?')" type="submit" class="btn btn-sm btn-outline-warning" title="Sedang Direview">Sedang Direview</button>
+															</form>
+													</div>
+													<div class="col-3">
+															<form method="POST" action="/submission-mahasiswa/detail/telah-direview/{{$submission->id}}">
+																	{{ method_field('POST') }}
+																	{{ csrf_field() }}
+
+																	<button onclick="return confirm('Ubah menjadi telah direview?')" type="submit" class="btn btn-sm btn-outline-success" title="Telah Direview">Telah Direview</button>
+															</form>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</li>
+									@endif
 									
 								</ul>
 
+								<h2 class="font-semibold mt-5 text-xl">Hasil Review</h2>
+								@if($submission->saran_reviewer != null)
+								<p class="mb-5">{{ $submission->saran_reviewer }}</p>
+								@else
+								<p class="mb-5">Belum ada review</p>
+								@endif
+								
+								@if (Auth::user()->hasRole('student'))
 								<a href="{{ url("/submission") }}" class="btn btn-sm btn-dark mt-3 mb-3">< Kembali</a>
+								@elseif (Auth::user()->hasRole('reviewer'))
+								<a href="{{ url("/submission-mahasiswa") }}" class="btn btn-sm btn-outline-dark mt-3 mb-3">< Kembali</a>
+								<a href="{{ url('/submission-mahasiswa/detail/tambah-saran/'.$submission->id) }}" class="btn btn-sm btn-dark mt-3 mb-3">Kirim Hasil Review</a>
+								@endif
 
                 </div>
             </div>
