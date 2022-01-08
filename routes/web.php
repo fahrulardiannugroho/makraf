@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::put('/user/profile-setting/{username}', 'App\Http\Controllers\ProfileController@update')->name('update-profile');
 	Route::get('/user/account-setting', 'App\Http\Controllers\AkunController@index')->name('account-setting');
 	Route::put('/user/account-setting', 'App\Http\Controllers\AkunController@update')->name('account-update');
+
+	Route::get('/arsip-pkm-pkp', 'App\Http\Controllers\ArsipPkmPkpController@index')->name('arsip_pkm_pkp');
+	Route::get('/arsip-pimnas', 'App\Http\Controllers\ArsipPimnasController@index')->name('arsip_pimnas');
+
 });
 
 // for student
@@ -88,13 +92,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
 	Route::put('/berita/edit/{id}', 'App\Http\Controllers\BeritaController@update')->name('berita.update');
 	Route::delete('/berita/delete/{id}', 'App\Http\Controllers\BeritaController@destroy')->name('berita.destroy');
 	
-	Route::get('/arsip-pkm-pkp', 'App\Http\Controllers\ArsipPkmPkpController@index')->name('arsip_pkm_pkp');
 	Route::get('/arsip-pkm-pkp/create', 'App\Http\Controllers\ArsipPkmPkpController@create')->name('arsip_pkm_pkp.create');
 	Route::post('/arsip-pkm-pkp/create', 'App\Http\Controllers\ArsipPkmPkpController@store')->name('arsip_pkm_pkp.store');
 	Route::get('/arsip-pkm-pkp/edit/{id}', 'App\Http\Controllers\ArsipPkmPkpController@edit')->name('arsip_pkm_pkp.edit');
 	Route::put('/arsip-pkm-pkp/edit/{id}', 'App\Http\Controllers\ArsipPkmPkpController@update')->name('arsip_pkm_pkp.update');
 	Route::delete('/arsip-pkm-pkp/delete/{id}', 'App\Http\Controllers\ArsipPkmPkpController@destroy')->name('arsip_pkm_pkp.destroy');
 	
-	Route::get('/arsip-pimnas', 'App\Http\Controllers\ArsipPimnasController@index')->name('arsip_pimnas');
 });
 require __DIR__.'/auth.php';

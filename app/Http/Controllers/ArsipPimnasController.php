@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArsipPimnasController extends Controller
 {
@@ -13,7 +14,11 @@ class ArsipPimnasController extends Controller
      */
     public function index()
     {
-			return view('admins.arsip_pimnas.index');
+			if(Auth::user()->hasRole('student')){
+				return view('students.arsip_pimnas.index');
+			} elseif (Auth::user()->hasRole('admin')) {
+				return view('admins.arsip_pimnas.index');
+			}
     }
 
     /**

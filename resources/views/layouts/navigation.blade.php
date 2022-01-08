@@ -65,11 +65,11 @@
 												</x-slot>
 
 												<x-slot name="content">
-														<x-dropdown-link :href="route('lowongan-tim')" :active="request()->routeIs('lowongan-tim')">
+														<x-dropdown-link :href="route('arsip_pkm_pkp')" :active="request()->routeIs('arsip_pkm_pkp')">
 																{{ __('Arsip PKM') }}
 														</x-dropdown-link>
 
-														<x-dropdown-link :href="route('kawan-mahasiswa')" :active="request()->routeIs('kawan-mahasiswa')">
+														<x-dropdown-link :href="route('arsip_pimnas')" :active="request()->routeIs('arsip_pimnas')">
 																{{ __('Arsip PIMNAS') }}
 														</x-dropdown-link>
 												</x-slot>

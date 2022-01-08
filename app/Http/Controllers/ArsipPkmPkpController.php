@@ -6,6 +6,7 @@ use App\Models\ArsipPkmPkp;
 use App\Models\SkemaPkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ArsipPkmPkpController extends Controller
 {
@@ -20,10 +21,17 @@ class ArsipPkmPkpController extends Controller
 									->join('skema_pkm', 'arsip_pkm_pkp2.skema_pkm', '=', 'skema_pkm.id')
 									->select('arsip_pkm_pkp2.*', 'skema_pkm.skema')
 									->get();
+			
+			if(Auth::user()->hasRole('student')){
+				return view('students.arsip_pkm.pkp.index', [
+					'arsipPkmPkp' => $arsipPkmPkp
+				]);
+			} elseif (Auth::user()->hasRole('admin')) {
+				return view('admins.arsip_pkm.pkp.index', [
+					'arsipPkmPkp' => $arsipPkmPkp
+				]);
+			}
 
-			return view('admins.arsip_pkm.pkp.index', [
-				'arsipPkmPkp' => $arsipPkmPkp
-			]);
     }
 
     /**
