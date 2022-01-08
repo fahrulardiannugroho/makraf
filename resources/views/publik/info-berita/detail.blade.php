@@ -35,15 +35,14 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
+								<a class="nav-link active" aria-current="page" href="{{ url("/") }}">Home</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Informasi
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="{{ url('/kegiatan') }}">Infografis Kegiatan</a></li>
-									<li><a class="dropdown-item" href="{{ url('/berita') }}">Berita</a></li>
+									<li><a class="dropdown-item" href="{{ url('/berita') }}">Infografis berita</a></li>
 									<li><a class="dropdown-item" href="{{ url('/pengumuman') }}">Pengumuman</a></li>
 								</ul>
 							</li>
@@ -64,24 +63,19 @@
 										</div>
 								@endif
 						</div>
-						<!-- <div class="ms-auto">
-								@if (Route::has('login'))
-										<div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-												@auth
-														<a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-												@else
-														<a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-														@if (Route::has('register'))
-																<a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-														@endif
-												@endauth
-										</div>
-								@endif
-						</div> -->
 					</div>
 				</div>
 			</nav>
+
+			
+			<div class="container">
+					<h2 class="mt-3 font-semibold text-xl">{{ $postinganBerita->judul_postingan_berita }}</h2>
+					<p>Penulis: {{ $postinganBerita->penulis }}</p>
+
+					<img src="{{url('/images/'.$postinganBerita->gambar_postingan_berita)}}" width="100%" alt="Image" class="py-3"/>
+
+					<p> {{ $postinganBerita->isi_postingan_berita }} </p>
+			</div>
 
 
 			<!-- Optional JavaScript; choose one of the two! -->
@@ -96,4 +90,11 @@
 			-->
 
     </body>
+
+		<footer class="py-3 mt-4 bg-light">
+			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item"><a href="{{ url('/faq') }}" class="nav-link px-2 text-muted">FAQs</a></li>
+			</ul>
+			<p class="text-center text-muted">&copy; 2021 MakRaf</p>
+  </footer>
 </html>

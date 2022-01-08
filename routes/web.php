@@ -14,8 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 //public
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+// });
+Route::get('/', 'App\Http\Controllers\PublikDashboardController@index')->name('publik_dashboard');
+Route::get('/info-kegiatan', 'App\Http\Controllers\PublikKegiatanController@index')->name('publik_kegiatan');
+Route::get('/info-kegiatan/detail/{id}', 'App\Http\Controllers\PublikKegiatanController@show')->name('publik_kegiatan.show');
+
+Route::get('/info-berita', 'App\Http\Controllers\PublikBeritaController@index')->name('publik_berita');
+Route::get('/info-berita/detail/{id}', 'App\Http\Controllers\PublikBeritaController@show')->name('publik_berita.show');
+
+Route::get('/faq', function () {
+	return view('publik.faq.index');
 });
 
 Route::get('/login', function () {
