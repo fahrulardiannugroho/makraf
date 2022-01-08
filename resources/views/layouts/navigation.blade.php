@@ -111,10 +111,6 @@
 																{{ __('Kegiatan') }}
 														</x-dropdown-link>
 
-														<x-dropdown-link :href="route('pengumuman')" :active="request()->routeIs('pengumuman')">
-																{{ __('Pengumuman') }}
-														</x-dropdown-link>
-
 														<x-dropdown-link :href="route('berita')" :active="request()->routeIs('berita')">
 																{{ __('Berita') }}
 														</x-dropdown-link>
@@ -137,7 +133,7 @@
 												</x-slot>
 
 												<x-slot name="content">
-														<x-dropdown-link :href="route('arsip_pkm')" :active="request()->routeIs('arsip-pkm')">
+														<x-dropdown-link :href="route('arsip_pkm_pkp')" :active="request()->routeIs('arsip-pkm-pkp')">
 																{{ __('Arsip PKM') }}
 														</x-dropdown-link>
 

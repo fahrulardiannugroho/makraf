@@ -8,7 +8,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kegiatan') }}
+            {{ __('Postingan Kegiatan') }}
         </h2>
     </x-slot>
 
@@ -32,7 +32,7 @@
 														<tr>
 															<td> {{ $index + 1 }} </td>
 															<td> <img src="{{url('/images/'.$pk->gambar_postingan_kegiatan)}}" width="50" alt="Image"/> </td>
-															<td> {{ $pk->judul_postingan_kegiatan }} </td>
+															<td width="50%"> {{ $pk->judul_postingan_kegiatan }} </td>
 															<td> {{ $pk->penulis }} </td>
 															<td>
 																<div class="row">

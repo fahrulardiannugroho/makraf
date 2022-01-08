@@ -8,7 +8,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Postingan Kegiatan') }}
+            {{ __('Postingan Berita') }}
         </h2>
     </x-slot>
 
@@ -17,14 +17,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-										<h2 class="font-semibold text-xl">{{ $postinganKegiatan->judul_postingan_kegiatan }}</h2>
-										<small>Penulis: {{ $postinganKegiatan->penulis }} </small>
+										<h2 class="font-semibold text-xl">{{ $postinganBerita->judul_postingan_berita }}</h2>
+										<small>Penulis: {{ $postinganBerita->penulis }} </small>
 
-										<img src="{{url('/images/'.$postinganKegiatan->gambar_postingan_kegiatan)}}" alt="Image" class="mt-5 mb-5"/>
+										<img src="{{url('/images/'.$postinganBerita->gambar_postingan_berita)}}" width="500" alt="Image" class="mt-5 mb-5"/>
 
-										<p> {{ $postinganKegiatan->isi_postingan_kegiatan }} </p>
+										<p> {{ $postinganBerita->isi_postingan_berita }} </p>
 
-										<a href="/kegiatan" class="btn btn-sm btn-dark mt-5" > < Kembali </a>
+										<a href="/berita" class="btn btn-sm btn-dark mt-5" > < Kembali </a>
                 </div>
             </div>
         </div>

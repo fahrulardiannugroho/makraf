@@ -60,7 +60,7 @@ class KegiatanController extends Controller
 				$postinganKegiatan->isi_postingan_kegiatan = $request->isi_postingan_kegiatan;
 				$postinganKegiatan->save();
 			
-				return redirect('/kegiatan')->with('success', 'Data berhasil terkirim untuk direview');
+				return redirect('/kegiatan')->with('success', 'Postingan berhasil dipublikasi');
     }
 
     /**
@@ -129,7 +129,7 @@ class KegiatanController extends Controller
 				$postinganKegiatan -> penulis = $request->penulis;
 				$postinganKegiatan -> update();
 				
-				return redirect('/kegiatan')->with('success', 'Data berhasil terkirim untuk direview');
+				return redirect('/kegiatan')->with('success', 'Postingan berhasil diupdate');
     }
 
     /**

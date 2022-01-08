@@ -70,13 +70,21 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/kegiatan/edit/{id}', 'App\Http\Controllers\KegiatanController@edit')->name('kegiatan.edit');
 	Route::put('/kegiatan/edit/{id}', 'App\Http\Controllers\KegiatanController@update')->name('kegiatan.update');
 	Route::delete('/kegiatan/delete/{id}', 'App\Http\Controllers\KegiatanController@destroy')->name('kegiatan.destroy');
-
-	Route::get('/pengumuman', 'App\Http\Controllers\PengumumanController@index')->name('pengumuman');
-
-
-	Route::get('/berita', 'App\Http\Controllers\BeritaController@index')->name('berita');
 	
-	Route::get('/arsip-pkm', 'App\Http\Controllers\ArsipPkmController@index')->name('arsip_pkm');
+	Route::get('/berita', 'App\Http\Controllers\BeritaController@index')->name('berita');
+	Route::get('/berita/create', 'App\Http\Controllers\BeritaController@create')->name('berita.create');
+	Route::post('/berita/create', 'App\Http\Controllers\BeritaController@store')->name('berita.store');
+	Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@show')->name('berita.show');
+	Route::get('/berita/edit/{id}', 'App\Http\Controllers\BeritaController@edit')->name('berita.edit');
+	Route::put('/berita/edit/{id}', 'App\Http\Controllers\BeritaController@update')->name('berita.update');
+	Route::delete('/berita/delete/{id}', 'App\Http\Controllers\BeritaController@destroy')->name('berita.destroy');
+	
+	Route::get('/arsip-pkm-pkp', 'App\Http\Controllers\ArsipPkmPkpController@index')->name('arsip_pkm_pkp');
+	Route::get('/arsip-pkm-pkp/create', 'App\Http\Controllers\ArsipPkmPkpController@create')->name('arsip_pkm_pkp.create');
+	Route::post('/arsip-pkm-pkp/create', 'App\Http\Controllers\ArsipPkmPkpController@store')->name('arsip_pkm_pkp.store');
+	Route::get('/arsip-pkm-pkp/edit/{id}', 'App\Http\Controllers\ArsipPkmPkpController@edit')->name('arsip_pkm_pkp.edit');
+	Route::put('/arsip-pkm-pkp/edit/{id}', 'App\Http\Controllers\ArsipPkmPkpController@update')->name('arsip_pkm_pkp.update');
+	Route::delete('/arsip-pkm-pkp/delete/{id}', 'App\Http\Controllers\ArsipPkmPkpController@destroy')->name('arsip_pkm_pkp.destroy');
 	
 	Route::get('/arsip-pimnas', 'App\Http\Controllers\ArsipPimnasController@index')->name('arsip_pimnas');
 });
